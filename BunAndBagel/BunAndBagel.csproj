@@ -139,6 +139,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageApplication\AdminPage\PageAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApplication\AdminPage\PageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageApplication\Authorization\Entrance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +159,12 @@
   <ItemGroup>
     <Compile Include="PageApplication\AdminPage\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\AdminPage\PageAdd.xaml.cs">
+      <DependentUpon>PageAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\AdminPage\PageEdit.xaml.cs">
+      <DependentUpon>PageEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageApplication\Authorization\Entrance.xaml.cs">
       <DependentUpon>Entrance.xaml</DependentUpon>

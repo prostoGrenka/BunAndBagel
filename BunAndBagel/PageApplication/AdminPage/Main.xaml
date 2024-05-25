@@ -37,10 +37,9 @@
                                 <TextBlock Width="auto" TextWrapping="Wrap" Height="auto"><Run Text="Вид выпечки: "/><Run Text=" "/><Run Text="{Binding KindBunAndBagel.Kind}"/></TextBlock>
                             </StackPanel>
 
-                            <StackPanel Height="88" Width="285">
-                                <Button Content="Редактирование" x:Name="btnEdit" Width="137" Margin="5"/>
+                            <StackPanel Height="68" Width="272">
+                                <Button Content ="Измененить" x:Name="btnAdd" Width="137" Margin="5"/>
                                 <Button Content ="Удаление" x:Name="btnDelete" Width="138" Margin="5"/>
-                                <Button Content ="Изменение" x:Name="btnAdd" Width="137" Margin="5"/>
                             </StackPanel>
 
                             <Button x:Name="btnBuy" Content="Купить" Height="32"></Button>
