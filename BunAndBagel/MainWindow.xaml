@@ -1,0 +1,20 @@
+﻿<Window x:Class="BunAndBagel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BunAndBagel"
+        mc:Ignorable="d"
+        Title="Булочка и Бублик" Height="576" Width="911" Background="#FF7F50">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*" />
+            <RowDefinition Height="359*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" Text="Булочка и бублик" FontSize="52" Height="76" Grid.Row="0"/>
+        <Image HorizontalAlignment="Left" Margin="73,0,0,0" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Width="127" Source="/picture/Logotip.png"/>
+
+        <Frame Name="frameMain" NavigationUIVisibility="Hidden" Margin="10,10,10,-66" Grid.Row="1"/>
+    </Grid>
+</Window>

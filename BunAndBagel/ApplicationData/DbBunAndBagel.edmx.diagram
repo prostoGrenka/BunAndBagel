@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="021234639283413b86f6fa0f57346d1f" Name="Diagram1">
+        <EntityTypeShape EntityType="BunAndBagelModel.Balance" Width="1.5" PointX="0.75" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Cart" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Category" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Cook" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Filling" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.KindBunAndBagel" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.KindDough" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Order" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.OrderingProducts" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.ProductBunAndBagel" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Role" Width="1.5" PointX="0.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.StatusOrder" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.User" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <AssociationConnector Association="BunAndBagelModel.FK_User_Balance" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_Order_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_ProductBunAndBagel_Category1" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_ProductBunAndBagel_Cook" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_ProductBunAndBagel_Filling" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_ProductBunAndBagel_KindBunAndBagel" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_ProductBunAndBagel_KindDough" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_Order_StatusOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_OrderingProducts_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_OrderingProducts_ProductBunAndBagel" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_OrderingProducts_User" ManuallyRouted="false" />
+        <AssociationConnector Association="BunAndBagelModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
