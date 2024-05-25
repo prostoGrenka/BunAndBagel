@@ -26,4 +26,5 @@
 Повар ответственный за продукцию
 
 ## **Эта структура позволит эффективно управлять всей информацией:**
-Диаграмма:![image](https://github.com/prostoGrenka/BunAndBagel/assets/116602864/82d162a6-98ae-405c-976f-897d5fe1e4b9)
+Диаграмма: ![image](https://github.com/prostoGrenka/BunAndBagel/assets/116602864/e364cd82-6e3a-4ed5-99da-766cf5970397)
+
