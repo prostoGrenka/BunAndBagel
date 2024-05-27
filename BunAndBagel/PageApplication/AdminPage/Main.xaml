@@ -9,7 +9,7 @@
       Title="Main">
 
     <Grid>
-        <ListView x:Name="listProducts" Margin="0,49,0,0" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView x:Name="listProducts" Margin="0,49,0,48" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="138">
@@ -44,6 +44,8 @@
 
                             <Button x:Name="btnBuy" Content="Купить" Height="32"></Button>
                         </StackPanel>
+                        
+                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -53,7 +55,10 @@
         <Button Content ="Корзина" x:Name="btnCart" Margin="731,10,10,415"></Button>
 
         <TextBox Margin="156,10,464,415"></TextBox>
-        <Button Content="Поиск" Margin="342,10,354,415"></Button>
+        <Button Content="Поиск" Margin="529,10,167,414"></Button>
 
+        <Button x:Name="btnAdd" Margin="10,410,657,10" Content="Добавить" Click="btnAdd_Click"></Button>
+        <Button x:Name="btnDelete" Margin="156,410,511,10" Content="Удалить" Click="btnDelete_Click"></Button>
+        <ComboBox x:Name="comboSort" Margin="341,10,276,413"></ComboBox>
     </Grid>
 </Page>

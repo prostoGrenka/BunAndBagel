@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace BunAndBagel.PageApplication
 {
@@ -25,16 +26,68 @@ namespace BunAndBagel.PageApplication
         {
             InitializeComponent();
             List<ProductBunAndBagel> products = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+            var currentProduct = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
+            listProducts.ItemsSource = currentProduct;
 
-            if (products.Count > 0)
+            Downloads();
+        }
+        List<ProductBunAndBagel> productBunAndBagel;
+
+        public void Downloads()
+        {
+            productBunAndBagel = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+
+            if (productBunAndBagel.Count > 0)
             {
-                tbCounter.Text = "Найдено " + products.Count.ToString() + "товаров";
+                tbCounter.Text = "Найдено " + productBunAndBagel.Count + " товаров";
             }
             else
             {
                 tbCounter.Text = "Ничего не найдено";
             }
-            listProducts.ItemsSource = products; //hi
+            listProducts.ItemsSource = productBunAndBagel; 
+            comboSort.Items.Add("По вохврастанию товаров на складе");
+            comboSort.Items.Add("По уменьшению товаров на складе");
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedProduct = listProducts.SelectedItems.Cast<ProductBunAndBagel>().ToList();
+            List<ProductBunAndBagel> product = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+            var productall = product;
+            if (selectedProduct != null)
+            {
+                if (MessageBox.Show("Вы точно хотите удалить выбранный товар?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        BunAndBagelEntities.GetContext().ProductBunAndBagel.RemoveRange(selectedProduct);
+                        BunAndBagelEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные удалены");
+                        listProducts.ItemsSource = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
+                        productBunAndBagel = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+
+                        if(productBunAndBagel.Count > 0)
+                        {
+                            tbCounter.Text = "Найдено " + productBunAndBagel.Count + " товаров";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Вы ничего не выбрали", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new AdminPage.PageAdd((sender as Button).DataContext as ProductBunAndBagel));
         }
     }
 }

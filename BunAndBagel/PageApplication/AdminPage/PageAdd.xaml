@@ -41,7 +41,7 @@
 
         <Image x:Name="imgData" Margin="358,20,18,201"></Image>
         <Button Content="Назад" x:Name="btnBack" Margin="680,410,10,10"/>
-        <Button Content="Добавить" x:Name="btnAdd" Margin="440,410,250,10"/>
+        <Button Content="Добавить" x:Name="btnAdd" Margin="440,410,250,10" Click="btnAdd_Click"/>
         <Button Content="Очистить" x:Name="btnClear" Margin="562,410,128,10"/>
 
     </Grid>
