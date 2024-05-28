@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BunAndBagel"
         mc:Ignorable="d"
-        Title="Булочка и Бублик" Height="576" Width="911" Background="#FF7F50">
-    <Grid>
+        Title="Булочка и Бублик" Height="760" Width="920" Background="#FF7F50">
+    <Grid Margin="0,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*" />
             <RowDefinition Height="359*"/>
         </Grid.RowDefinitions>
 
         <TextBlock HorizontalAlignment="Center" Text="Булочка и бублик" FontSize="52" Height="76" Grid.Row="0"/>
-        <Image HorizontalAlignment="Left" Margin="73,0,0,0" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Width="127" Source="/picture/Logotip.png"/>
+        <Image Source="/Picture/Logotip.png" Margin="17,0,690,620" Grid.RowSpan="2" />
 
-        <Frame Name="frameMain" NavigationUIVisibility="Hidden" Margin="10,10,10,-66" Grid.Row="1"/>
+
+        <Frame Name="frameMain" NavigationUIVisibility="Hidden" Margin="10,0,10,0" Grid.Row="1" Height="600" VerticalAlignment="Center"/>
     </Grid>
 </Window>

@@ -32,7 +32,6 @@ namespace BunAndBagel.PageApplication
             Downloads();
         }
         List<ProductBunAndBagel> productBunAndBagel;
-
         public void Downloads()
         {
             productBunAndBagel = AppConnect.modelOdb.ProductBunAndBagel.ToList();
@@ -76,18 +75,56 @@ namespace BunAndBagel.PageApplication
                         MessageBox.Show(ex.Message.ToString());
                     }
                 }
-
             }
             else
             {
                 MessageBox.Show("Вы ничего не выбрали", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
         }
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.FrmMain.Navigate(new AdminPage.PageAdd((sender as Button).DataContext as ProductBunAndBagel));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            findGoods();
+        }
+        ProductBunAndBagel[] findGoods()
+        {
+            List<ProductBunAndBagel> product = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+            var productall = product;
+            if (TBoxSearch != null)
+            {
+                product = product.Where(x => x.Name.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            }
+            if (comboSort.SelectedIndex > 0)
+            {
+                switch (comboSort.SelectedIndex)
+                {
+                    case 0:
+                        product = product.OrderBy(x => x.Quantity).ToList<ProductBunAndBagel>();
+                        break;
+                    case 1:
+                        product = product.OrderByDescending(x => x.Quantity).ToList<ProductBunAndBagel>();
+                        break;
+                }
+            }
+            if (product.Count > 0)
+            {
+                tbCounter.Text = "Найдено " + product.Count + " товаров";
+            }
+            else
+            {
+                tbCounter.Text = "Ничего не найдено";
+            }
+            listProducts.ItemsSource = product;
+            return product.ToArray();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new AdminPage.PageEdit((sender as Button).DataContext as ProductBunAndBagel));
         }
     }
 }

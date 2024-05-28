@@ -34,40 +34,81 @@ namespace BunAndBagel.PageApplication.AdminPage
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            int category = categoryCombo.SelectedIndex + 1;
-            int kind = kindCombo.SelectedIndex + 1;
-            int dough = doughCombo.SelectedIndex + 1;
-            int filling = fillingCombo.SelectedIndex + 1;
-            int cook = cookCombo.SelectedIndex + 1;
-            string name = nameBox.Text;
-            int price = Convert.ToInt32(priceBox.Text);
-            int weight = Convert.ToInt32(weightBox.Text);
-            int quantity = Convert.ToInt32(quantityBox.Text);
-            string photo = photoBox.Text;
             try
             {
+               
+                int category = categoryCombo.SelectedIndex + 1;
+                int kind = kindCombo.SelectedIndex + 1;
+                int dough = doughCombo.SelectedIndex + 1;
+                int filling = fillingCombo.SelectedIndex + 1;
+                int cook = cookCombo.SelectedIndex + 1;
+                string name = nameBox.Text;
+                int price = Convert.ToInt32(priceBox.Text);
+                int weight = Convert.ToInt32(weightBox.Text);
+                int quantity = Convert.ToInt32(quantityBox.Text);
+                string photo = photoBox.Text;
 
-                ProductBunAndBagel goods = new ProductBunAndBagel()
+                try
                 {
-                    Id_Category = category,
-                    Id_Kind = kind,
-                    Id_Dough = dough,
-                    Id_Filling = filling,
-                    Id_Cook = cook,
-                    Name = name,
-                    Price = price,
-                    Weight = weight,
-                    Quantity = quantity,
-                    Photo = photo,
+
+                    ProductBunAndBagel goods = new ProductBunAndBagel()
+                    {
+                        Id_Category = category,
+                        Id_Kind = kind,
+                        Id_Dough = dough,
+                        Id_Filling = filling,
+                        Id_Cook = cook,
+                        Name = name,
+                        Price = price,
+                        Weight = weight,
+                        Quantity = quantity,
+                        Photo = photo,
 
 
-                };
+                    };
+                    AppConnect.modelOdb.ProductBunAndBagel.Add(goods);
+                    AppConnect.modelOdb.SaveChanges();
+                    MessageBox.Show("данные добавлены!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AppFrame.FrmMain.Navigate(new Main());
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при добавлении данных!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                AppConnect.modelOdb.SaveChanges();
             }
             catch
             {
-                MessageBox.Show("Ошибка при добавлении данных!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка при добавлении данных! Все поля должны быть заполнены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             AppConnect.modelOdb.SaveChanges();
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new Main());
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            categoryCombo.SelectedIndex = -1;
+            kindCombo.SelectedIndex = -1;
+            doughCombo.SelectedIndex = -1;
+            fillingCombo.SelectedIndex = -1;
+            cookCombo.SelectedIndex = -1;
+            nameBox.Clear();
+            priceBox.Clear();
+            weightBox.Clear();
+            quantityBox.Clear();
+            photoBox.Clear();
+        }
+        private void textBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key < Key.D0 || e.Key > Key.D9) && e.Key != Key.Back)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

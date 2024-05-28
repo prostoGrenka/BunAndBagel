@@ -5,44 +5,44 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BunAndBagel.PageApplication.AdminPage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="920"
       Title="PageAdd">
 
     <Grid>
-        <ComboBox x:Name="categoryCombo" Margin="10,40,655,385"/>
-        <Label Content="Категория товара" Margin="10,10,655,415"/>
+        <ComboBox x:Name="categoryCombo" Margin="10,40,720,525"/>
+        <Label Content="Категория товара" Margin="10,10,720,565"/>
 
-        <ComboBox x:Name="kindCombo" Margin="10,110,655,315"/>
-        <Label Content="Вид товара" Margin="10,235,655,190"/>
+        <ComboBox x:Name="kindCombo" Margin="10,110,720,450"/>
+        <Label Content="Вид товара" Margin="10,235,720,335"/>
 
-        <ComboBox x:Name="doughCombo" Margin="10,185,655,240"/>
-        <Label Content="Вид теста" Margin="10,155,655,270"/>
+        <ComboBox x:Name="doughCombo" Margin="10,185,720,385"/>
+        <Label Content="Вид теста" Margin="10,155,720,415"/>
 
-        <TextBox x:Name="nameBox" Margin="10,265,655,160"/>
-        <Label Content="Категория товара" Margin="10,80,655,345"/>
+        <TextBox x:Name="nameBox" Margin="10,265,720,300"/>
+        <Label Content="Категория товара" Margin="10,80,720,490"/>
 
-        <ComboBox x:Name="fillingCombo" Margin="205,40,460,385"/>
-        <Label Content="Начинка" Margin="205,10,460,415"/>
+        <ComboBox x:Name="fillingCombo" Margin="224,40,501,525"/>
+        <Label Content="Начинка" Margin="224,10,501,560"/>
 
-        <ComboBox x:Name="cookCombo" Margin="205,110,460,315"/>
-        <Label Content="Повар" Margin="205,80,460,345"/>
+        <ComboBox x:Name="cookCombo" Margin="224,110,501,450"/>
+        <Label Content="Повар" Margin="224,80,501,490"/>
 
-        <TextBox x:Name="priceBox" Margin="205,185,460,240"/>
-        <Label Content="Ценник товара" Margin="205,155,460,270"/>
+        <TextBox x:Name="priceBox" Margin="224,185,501,385" PreviewKeyDown="textBox_PreviewKeyDown"/>
+        <Label Content="Ценник товара" Margin="224,155,501,415"/>
 
-        <TextBox x:Name ="weightBox" Margin="205,265,460,160"/>
-        <Label Content="Вес товара" Margin="205,235,460,190"/>
+        <TextBox x:Name ="weightBox" Margin="224,265,501,300" PreviewKeyDown="textBox_PreviewKeyDown"/>
+        <Label Content="Вес товара" Margin="224,235,531,335"/>
 
-        <TextBox x:Name="photoBox" Margin="605,265,60,160"/>
-        <Label Content="Фотография товара" Margin="415,265,250,160"/>
+        <TextBox x:Name="photoBox" Margin="694,265,20,300"/>
+        <Label Content="Фотография товара" Margin="434,265,231,300"/>
 
-        <TextBox x:Name ="quantityBox" Margin="115,350,550,75"/>
-        <Label Content="Кол-во товара" Margin="115,320,550,105"/>
+        <TextBox x:Name ="quantityBox" Margin="105,360,560,205" PreviewKeyDown="textBox_PreviewKeyDown"/>
+        <Label Content="Кол-во товара" Margin="105,330,560,240"/>
 
-        <Image x:Name="imgData" Margin="358,20,18,201"></Image>
-        <Button Content="Назад" x:Name="btnBack" Margin="680,410,10,10"/>
-        <Button Content="Добавить" x:Name="btnAdd" Margin="440,410,250,10" Click="btnAdd_Click"/>
-        <Button Content="Очистить" x:Name="btnClear" Margin="562,410,128,10"/>
+        <Image x:Name="imgData" Margin="446,20,18,344"></Image>
+        <Button Content="Назад" x:Name="btnBack" Margin="743,540,10,10" Click="btnBack_Click"/>
+        <Button Content="Добавить" x:Name="btnAdd" Margin="399,540,354,10" Click="btnAdd_Click"/>
+        <Button Content="Очистить" x:Name="btnClear" Margin="571,540,182,10" Click="btnClear_Click"/>
 
     </Grid>
 
