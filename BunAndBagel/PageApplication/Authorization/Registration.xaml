@@ -44,10 +44,6 @@
                 <Button x:Name="Back" HorizontalAlignment="Center" Height="25" Width="140" Margin="10" Content="Назад" Click="Back_Click" Background="SandyBrown"/>
 
             </StackPanel>
-
-
-
-
         </StackPanel>
     </Grid>
 </Page>
