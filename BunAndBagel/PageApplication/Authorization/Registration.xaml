@@ -28,7 +28,6 @@
 
                 <Button x:Name="RegBtn" Height="25" Width="140" Margin="10" Content="Зарегистрироваться" Click="RegBtn_Click" Background="SandyBrown"/>
             </StackPanel>
-            
             <StackPanel Width="188" Height="354">
                 <Label Content="Имя" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
                 <TextBox Text="Не обязательно" x:Name="txbName" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
