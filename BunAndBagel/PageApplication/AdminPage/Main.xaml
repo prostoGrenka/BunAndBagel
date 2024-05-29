@@ -60,7 +60,7 @@
 
         <Button x:Name="btnAdd" Margin="10,477,769,85" Content="Добавить" Click="btnAdd_Click" Background="SandyBrown"></Button>
         <Button x:Name="btnDelete" Margin="146,477,628,85" Content="Удалить" Click="btnDelete_Click" Background="SandyBrown"></Button>
-        <Button x:Name="infoUser" Margin="740,477,18,85" Content="Пользователи" Click="btnDelete_Click" Background="SandyBrown"></Button>
+        <Button x:Name="infoUser" Margin="740,477,18,85" Content="Пользователи" Click="btnInfoUser_Click" Background="SandyBrown"></Button>
 
         <ComboBox x:Name="comboSort" Margin="341,10,391,556"></ComboBox>
     </Grid>

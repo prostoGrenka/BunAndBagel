@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BunAndBagel.PageApplication.AdminPage"
       mc:Ignorable="d"
-      Title="PageEdit" Height="600" Width="920">
+      Title="PageEdit" Height="600" Width="920" FontSize="21">
 
     <Grid>
         <ComboBox SelectedItem="{Binding Category.Category1}" x:Name="categoryCombo" Margin="10,40,720,525"/>
         <Label Content="Категория товара" Margin="10,10,720,565"/>
 
         <ComboBox SelectedItem="{Binding KindBunAndBagel.Kind}" x:Name="kindCombo" Margin="10,110,720,450"/>
-        <Label Content="Категория товара" Margin="10,80,720,490"/>
+        <Label Content="Вид товара" Margin="10,80,720,490"/>
 
         <ComboBox SelectedItem="{Binding KindDough.KindDough1}" x:Name="doughCombo" Margin="10,185,720,385"/>
         <Label Content="Вид теста" Margin="10,155,720,415"/>
@@ -40,7 +40,7 @@
 
         <Image x:Name="imgData" Margin="446,20,18,344"></Image>
         
-        <Button Content="Назад" x:Name="btnBack" Margin="715,450,38,100" Click="btnBack_Click_1" Background="SandyBrown"/>
+        <Button Content="Назад" x:Name="btnBack" Margin="715,450,38,100" Click="btnBack_Click" Background="SandyBrown"/>
         <Button Content="Сохранить" x:Name="btnSave" Margin="371,450,382,100" Click="btnSave_Click" Background="SandyBrown"/>
         <Button Content="Очистить" x:Name="btnClear" Margin="543,450,210,100" Background="SandyBrown"/>
 

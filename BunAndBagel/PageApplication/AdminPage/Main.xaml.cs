@@ -83,7 +83,7 @@ namespace BunAndBagel.PageApplication
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.FrmMain.Navigate(new AdminPage.PageAdd((sender as Button).DataContext as ProductBunAndBagel));
+            AppFrame.FrmMain.Navigate(new AdminPage.PageAdd());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -130,6 +130,11 @@ namespace BunAndBagel.PageApplication
         private void listProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnInfoUser_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new AdminPage.PageInfoUsers());
         }
     }
 }

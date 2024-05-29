@@ -5,20 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BunAndBagel.PageApplication.AdminPage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="957"
       Title="PageInfoUsers" FontFamily="Bahnschrift SemiBold">
 
-    <Grid>
-        <ListView x:Name="ListOrders" ScrollViewer.CanContentScroll="False" Background="SandyBrown" Margin="10,47,10,60" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="18" FontFamily="Bahnschrift SemiBold">
+    <Grid Margin="0,0,0,71">
+        <ListView x:Name="ListUsers" ScrollViewer.CanContentScroll="False" Background="SandyBrown" Margin="0,48,20,67" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="18" FontFamily="Bahnschrift SemiBold" SelectionChanged="ListOrders_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="718" Height="163">
                         <Image Source="{Binding beautyGoods.CurrentPhoto}" Grid.Column="0" Margin="-27,13,535,14"/>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,13,419,116"><Run Text="Логин: "/><Run Text=" "/><Run Text="{Binding Name}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,88,453,45"><Run Text="Имя: "/><Run Text=" "/><Run Text="{Binding Price}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,123,384,14"><Run Text="Телефон: "/><Run Text=" "/><Run Text="{Binding Quantity}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,52,419,69"><Run Text="Пароль: "/><Run Text=" "/><Run Text="{Binding Quantity}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="385,73,185,48"><Run Text="Роль: "/><Run Text=" "/><Run Text="{Binding Quantity}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,13,419,116"><Run Text="Логин: "/><Run Text=" "/><Run Text="{Binding User.Login}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,88,453,45"><Run Text="Имя: "/><Run Text=" "/><Run Text="{Binding User.Name}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,123,384,14"><Run Text="Телефон: "/><Run Text=" "/><Run Text="{Binding User.Phone}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,52,384,69"><Run Text="Пароль: "/><Run Text=" "/><Run Text="{Binding User.Password}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="385,73,185,48"><Run Text="Роль: "/><Run Text=" "/><Run Text="{Binding Role.Role1}"/></TextBlock>
                         <Button x:Name="btnDel" Content="Удалить" HorizontalAlignment="Left" Margin="570,77,0,60" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown"/>
                         <Button x:Name="btnInfo" Content="Подробнее" HorizontalAlignment="Left" Margin="570,100,0,37" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown"/>
                     </Grid>
@@ -26,12 +26,15 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button x:Name="btnAddUsers" Content="Создать нового пользователя" Margin="10,395,580,10"></Button>
-        <Button x:Name="btnEditUser" Content="Редактировать пользователя" Margin="225,395,365,10"></Button>
+        <Button x:Name="btnAddUsers" Content="Создать нового пользователя" Margin="10,467,691,10" Background="RosyBrown" Click="btnAddUsers_Click"></Button>
+        <Button x:Name="btnEditUser" Content="Редактировать пользователя" Margin="306,462,403,10" Background="RosyBrown" Click="btnEditUser_Click"></Button>
 
-        <TextBlock Margin="10,6,556,412"></TextBlock>
-        <Button x:Name="btnSearh" Content="Найти" Margin="271,2,411,408"/>
+        <TextBlock Margin="222,2,479,495"></TextBlock>
+        <Button x:Name="btnSearh" Content="Найти" Margin="749,13,20,486" Background="RosyBrown"/>
 
-        <Button x:Name="btnBack" Content="Назад" Margin="648,-1,10,413"/>
+        <Button x:Name="btnBack" Content="Назад" Margin="758,467,29,10" Background="RosyBrown" Click="btnBack_Click"/>
+
+        <TextBlock x:Name="tbCounter" Margin="10,5,753,495"></TextBlock>
+        <ComboBox x:Name="comboSort" Margin="528,13,213,486"/>
     </Grid>
 </Page>

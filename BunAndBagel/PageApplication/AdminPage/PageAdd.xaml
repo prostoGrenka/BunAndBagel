@@ -6,11 +6,11 @@
       xmlns:local="clr-namespace:BunAndBagel.PageApplication.AdminPage"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="920"
-      Title="PageAdd">
+      Title="PageAdd" FontFamily="Bahnschtift" FontSize="21">
 
     <Grid>
         <ComboBox x:Name="categoryCombo" Margin="10,40,720,525"/>
-        <Label Content="Категория товара" Margin="10,10,720,565"/>
+        <Label Content="Категория товара" Margin="10,10,720,560"/>
 
         <ComboBox x:Name="kindCombo" Margin="10,110,720,450"/>
         <Label Content="Вид товара" Margin="10,235,720,335"/>
@@ -19,7 +19,7 @@
         <Label Content="Вид теста" Margin="10,155,720,415"/>
 
         <TextBox x:Name="nameBox" Margin="10,265,720,300"/>
-        <Label Content="Категория товара" Margin="10,80,720,490"/>
+        <Label Content="Название товара" Margin="10,80,720,490"/>
 
         <ComboBox x:Name="fillingCombo" Margin="224,40,501,525"/>
         <Label Content="Начинка" Margin="224,10,501,560"/>

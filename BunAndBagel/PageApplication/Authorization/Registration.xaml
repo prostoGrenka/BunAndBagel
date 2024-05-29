@@ -11,7 +11,7 @@
     <Grid>
         <Label Content="Регистрация" Margin="252,-6,337,417" FontSize="26"/>
 
-        <StackPanel Margin="167,33,252,63" Orientation="Horizontal">
+        <StackPanel Margin="334,33,85,63" Orientation="Horizontal">
 
             <StackPanel Width="190" Height="354">
                 <Label Content="Логин" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>

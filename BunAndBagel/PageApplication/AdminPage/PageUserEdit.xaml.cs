@@ -1,7 +1,7 @@
 ﻿using BunAndBagel.ApplicationData;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,79 +14,77 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BunAndBagel.PageApplication.AdminPage
 {
     /// <summary>
-    /// Логика взаимодействия для PageEdit.xaml
+    /// Логика взаимодействия для PageUserEdit.xaml
     /// </summary>
-    public partial class PageEdit : Page
+    public partial class PageUserEdit : Page
     {
-        private ProductBunAndBagel _editgoods = new ProductBunAndBagel();
-        public PageEdit(ProductBunAndBagel selectedP)
+        private User _editUser = new User();
+        public PageUserEdit(User selectedUser)
         {
             InitializeComponent();
 
-
-            if (selectedP != null)
+            if (selectedUser != null)
             {
-                _editgoods = selectedP;
+                _editUser = selectedUser;
             }
-            //categoryCombo.ItemsSource = selectedP.categoryCombo;
 
+            roleCombo.ItemsSource = BunAndBagelEntities.GetContext().Role.Select(x => x.Role1).ToList();
 
-            DataContext = _editgoods;
-            categoryCombo.ItemsSource = BunAndBagelEntities.GetContext().Category.Select(x => x.Category1).ToList();
-            kindCombo.ItemsSource = BunAndBagelEntities.GetContext().KindBunAndBagel.Select(x => x.Kind).ToList();
-            doughCombo.ItemsSource = BunAndBagelEntities.GetContext().KindDough.Select(x => x.KindDough1).ToList();
-            fillingCombo.ItemsSource = BunAndBagelEntities.GetContext().Filling.Select(x => x.Filling1).ToList();
-            cookCombo.ItemsSource = BunAndBagelEntities.GetContext().Cook.Select(x => x.Name).ToList();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (string.IsNullOrEmpty(_editgoods.Name))
+            if (string.IsNullOrEmpty(_editUser.Name))
             {
                 errors.AppendLine("Введите название");
             }
-            else if (categoryCombo.Text == "")
+            else if (txbLogin.Text == "")
             {
                 MessageBox.Show("Введите значение 'Категория'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
             }
-            if (kindCombo.Text == "")
+            if (txbName.Text == "")
             {
                 MessageBox.Show("Введите значение 'Вид выпечки'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
             }
-            else if (doughCombo.Text == "")
+            else if (txbLastName.Text == "")
             {
                 MessageBox.Show("Введите значение 'Вид теста'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
             }
-            else if (fillingCombo.Text == "")
+            else if (txbLogin.Text == "")
             {
                 MessageBox.Show("Введите значение 'Начинка'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
-            }   
-            else if (cookCombo.Text == "")
+            }
+            else if (txbEmail.Text == "")
             {
                 MessageBox.Show("Введите значение 'Повар'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
-            }       
-            else if (priceBox.Text == "")
+            }
+            else if (txbNumberPhone.Text == "")
             {
                 MessageBox.Show("Введите значение 'Цена'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
-            }    
-            else if (weightBox.Text == "")
+            }
+            else if (txbAdress.Text == "")
             {
                 MessageBox.Show("Введите значение 'Вес'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
-            }      
+            }    
+            else if (Convert.ToString(roleCombo.ItemsSource) == "")
+            {
+                MessageBox.Show("Введите значение 'Вес'!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error); return;
+            }
 
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
                 return;
             }
-            if (_editgoods.Id == 0)
+            if (_editUser.Id == 0)
             {
-                BunAndBagelEntities.GetContext().ProductBunAndBagel.Add(_editgoods);
+                BunAndBagelEntities.GetContext().User.Add(_editUser);
             }
             try
             {
@@ -100,24 +98,16 @@ namespace BunAndBagel.PageApplication.AdminPage
             AppFrame.FrmMain.Navigate(new Main());
 
         }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            AppFrame.FrmMain.Navigate(new Main());
-        }
-
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            categoryCombo.SelectedIndex = -1;
-            kindCombo.SelectedIndex = -1;
-            doughCombo.SelectedIndex = -1;
-            fillingCombo.SelectedIndex = -1;
-            cookCombo.SelectedIndex = -1;
-            nameBox.Clear();
-            priceBox.Clear();
-            weightBox.Clear();
-            quantityBox.Clear();
-            photoBox.Clear();
+            roleCombo.SelectedIndex = -1;
+            txbLogin.Clear();
+            txbName.Clear();
+            txbLastName.Clear();
+            txbLogin.Clear();
+            txbEmail.Clear();
+            txbNumberPhone.Clear();
+            txbAdress.Clear();
         }
 
         private void textBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -127,5 +117,17 @@ namespace BunAndBagel.PageApplication.AdminPage
                 e.Handled = true;
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new Main());
+        }
+
+        private void btnAddImage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }

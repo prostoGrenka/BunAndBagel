@@ -21,7 +21,7 @@ namespace BunAndBagel.PageApplication.AdminPage
     /// </summary>
     public partial class PageAdd : Page
     {
-        public PageAdd(ProductBunAndBagel selectedP)
+        public PageAdd()
         {
             InitializeComponent();
 
