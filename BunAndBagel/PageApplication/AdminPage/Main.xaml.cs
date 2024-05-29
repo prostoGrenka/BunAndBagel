@@ -126,5 +126,10 @@ namespace BunAndBagel.PageApplication
         {
             AppFrame.FrmMain.Navigate(new AdminPage.PageEdit((sender as Button).DataContext as ProductBunAndBagel));
         }
+
+        private void listProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

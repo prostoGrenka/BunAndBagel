@@ -143,7 +143,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageApplication\AdminPage\PageAddEditUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageApplication\AdminPage\PageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApplication\AdminPage\PageInfoUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageApplication\PageCart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageApplication\AdminPage\Main.xaml.cs">
@@ -163,14 +175,23 @@
     <Compile Include="PageApplication\AdminPage\PageAdd.xaml.cs">
       <DependentUpon>PageAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageApplication\AdminPage\PageAddEditUsers.xaml.cs">
+      <DependentUpon>PageAddEditUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageApplication\AdminPage\PageEdit.xaml.cs">
       <DependentUpon>PageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\AdminPage\PageInfoUsers.xaml.cs">
+      <DependentUpon>PageInfoUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageApplication\Authorization\Entrance.xaml.cs">
       <DependentUpon>Entrance.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageApplication\Authorization\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\PageCart.xaml.cs">
+      <DependentUpon>PageCart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

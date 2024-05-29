@@ -26,11 +26,12 @@ namespace BunAndBagel.PageApplication.AdminPage
         public PageEdit(ProductBunAndBagel selectedP)
         {
             InitializeComponent();
+
+
             if (selectedP != null)
             {
                 _editgoods = selectedP;
             }
-
             //categoryCombo.ItemsSource = selectedP.categoryCombo;
 
 
