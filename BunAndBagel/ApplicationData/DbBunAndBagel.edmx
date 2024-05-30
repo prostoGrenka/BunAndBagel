@@ -92,6 +92,7 @@
           <Property Name="Weight" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Photo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Desciption" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -192,7 +193,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductBunAndBagel_Category1">
+        <Association Name="FK_ProductBunAndBagel_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="ProductBunAndBagel" Type="Self.ProductBunAndBagel" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,7 +312,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="OrderingProducts" EntitySet="OrderingProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductBunAndBagel_Category1" Association="Self.FK_ProductBunAndBagel_Category1">
+          <AssociationSet Name="FK_ProductBunAndBagel_Category" Association="Self.FK_ProductBunAndBagel_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="ProductBunAndBagel" EntitySet="ProductBunAndBagel" />
           </AssociationSet>
@@ -368,7 +369,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductBunAndBagel" Relationship="Self.FK_ProductBunAndBagel_Category1" FromRole="Category" ToRole="ProductBunAndBagel" />
+          <NavigationProperty Name="ProductBunAndBagel" Relationship="Self.FK_ProductBunAndBagel_Category" FromRole="Category" ToRole="ProductBunAndBagel" />
         </EntityType>
         <EntityType Name="Cook">
           <Key>
@@ -445,7 +446,8 @@
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_ProductBunAndBagel_Category1" FromRole="ProductBunAndBagel" ToRole="Category" />
+          <Property Name="Desciption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_ProductBunAndBagel_Category" FromRole="ProductBunAndBagel" ToRole="Category" />
           <NavigationProperty Name="Cook" Relationship="Self.FK_ProductBunAndBagel_Cook" FromRole="ProductBunAndBagel" ToRole="Cook" />
           <NavigationProperty Name="Filling" Relationship="Self.FK_ProductBunAndBagel_Filling" FromRole="ProductBunAndBagel" ToRole="Filling" />
           <NavigationProperty Name="KindBunAndBagel" Relationship="Self.FK_ProductBunAndBagel_KindBunAndBagel" FromRole="ProductBunAndBagel" ToRole="KindBunAndBagel" />
@@ -520,7 +522,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductBunAndBagel_Category1">
+        <Association Name="FK_ProductBunAndBagel_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="ProductBunAndBagel" Type="Self.ProductBunAndBagel" Multiplicity="*" />
           <ReferentialConstraint>
@@ -663,7 +665,7 @@
             <End Role="Cart" EntitySet="Cart" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductBunAndBagel_Category1" Association="Self.FK_ProductBunAndBagel_Category1">
+          <AssociationSet Name="FK_ProductBunAndBagel_Category" Association="Self.FK_ProductBunAndBagel_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="ProductBunAndBagel" EntitySet="ProductBunAndBagel" />
           </AssociationSet>
@@ -805,6 +807,7 @@
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Desciption" ColumnName="Desciption" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

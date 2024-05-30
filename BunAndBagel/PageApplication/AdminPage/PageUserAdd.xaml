@@ -11,7 +11,7 @@
     <Grid>
         <Label Content="Создание пользователя" Margin="252,-6,245,552" FontSize="26"/>
 
-        <StackPanel Margin="400,53,19,152" Orientation="Horizontal">
+        <StackPanel Margin="307,82,112,123" Orientation="Horizontal">
 
             <StackPanel Width="190" Height="354">
                 <Label Content="Логин" HorizontalAlignment="Center" Margin="5" Height="24" Width="134" />
@@ -45,8 +45,8 @@
 
             </StackPanel>
         </StackPanel>
-        <Label Content="Роль пользователя" Margin="257,324,400,242"/>
-        <ComboBox x:Name="roleCombo" Margin="257,363,400,207" Background="RosyBrown"/>
-        <Button x:Name="btnClear" Content="Очистить всё" Margin="257,398,400,173" Background="SandyBrown" Click="btnClear_Click"></Button>
+        <Label Content="Роль пользователя" Margin="164,353,493,213"/>
+        <ComboBox x:Name="roleCombo" Margin="164,392,493,178" Background="RosyBrown"/>
+        <Button x:Name="btnClear" Content="Очистить всё" Margin="164,427,493,144" Background="SandyBrown" Click="btnClear_Click"></Button>
     </Grid>
 </Page>

@@ -136,5 +136,31 @@ namespace BunAndBagel.PageApplication
         {
             AppFrame.FrmMain.Navigate(new AdminPage.PageInfoUsers());
         }
+
+        private void comboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            findGoods();
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            findGoods();
+        }
+
+        private void btnCart_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.FrmMain.Navigate(new PageCart());
+        }
+
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            comboSort.SelectedIndex = -1;
+            TBoxSearch.Clear();
+        }
     }
 }

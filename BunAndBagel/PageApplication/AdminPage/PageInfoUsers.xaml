@@ -13,28 +13,30 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="718" Height="163">
-                        <Image Source="{Binding beautyGoods.CurrentPhoto}" Grid.Column="0" Margin="-27,13,535,14"/>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,13,419,116"><Run Text="Логин: "/><Run Text=" "/><Run Text="{Binding User.Login}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,88,453,45"><Run Text="Имя: "/><Run Text=" "/><Run Text="{Binding User.Name}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,123,384,14"><Run Text="Телефон: "/><Run Text=" "/><Run Text="{Binding User.Phone}"/></TextBlock>
-                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,52,384,69"><Run Text="Пароль: "/><Run Text=" "/><Run Text="{Binding User.Password}"/></TextBlock>
+                        <Image Source="{Binding CurrentPhoto}" Grid.Column="0" Margin="-27,13,535,14"/>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,13,419,116"><Run Text="Логин: "/><Run Text=" "/><Run Text="{Binding Login}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,88,453,45"><Run Text="Имя: "/><Run Text=" "/><Run Text="{Binding Name}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,123,384,14"><Run Text="Телефон: "/><Run Text=" "/><Run Text="{Binding Phone}"/></TextBlock>
+                        <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,52,384,69"><Run Text="Пароль: "/><Run Text=" "/><Run Text="{Binding Password}"/></TextBlock>
                         <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="385,73,185,48"><Run Text="Роль: "/><Run Text=" "/><Run Text="{Binding Role.Role1}"/></TextBlock>
-                        <Button x:Name="btnDel" Content="Удалить" HorizontalAlignment="Left" Margin="570,77,0,60" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown"/>
-                        <Button x:Name="btnInfo" Content="Подробнее" HorizontalAlignment="Left" Margin="570,100,0,37" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown"/>
+                        <Button x:Name="btnDel" Content="Удалить" HorizontalAlignment="Left" Margin="570,54,0,83" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown" Click="btnDel_Click"/>
+                        <Button x:Name="btnInfo" Content="Подробнее" HorizontalAlignment="Left" Margin="570,77,0,60" Width="138" RenderTransformOrigin="0.5,0.5" Background="SandyBrown"/>
+                        <Button x:Name="btnEditUser" Content="Редактировать"  Background="SandyBrown" Click="btnEditUser_Click" Margin="570,103,10,33"></Button>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <Button x:Name="btnAddUsers" Content="Создать нового пользователя" Margin="10,467,691,10" Background="RosyBrown" Click="btnAddUsers_Click"></Button>
-        <Button x:Name="btnEditUser" Content="Редактировать пользователя" Margin="306,462,403,10" Background="RosyBrown" Click="btnEditUser_Click"></Button>
 
-        <TextBlock Margin="222,2,479,495"></TextBlock>
+        <TextBox x:Name="tbSearh" Margin="225,10,567,487"></TextBox>
         <Button x:Name="btnSearh" Content="Найти" Margin="749,13,20,486" Background="RosyBrown"/>
+        <Button x:Name="btnClear" Content="Очистить" Margin="556,13,213,486" Background="RosyBrown" Click="btnClear_Click"/>
 
         <Button x:Name="btnBack" Content="Назад" Margin="758,467,29,10" Background="RosyBrown" Click="btnBack_Click"/>
 
-        <TextBlock x:Name="tbCounter" Margin="10,5,753,495"></TextBlock>
-        <ComboBox x:Name="comboSort" Margin="528,13,213,486"/>
+        <TextBlock x:Name="tbCounter" Margin="10,5,737,495"></TextBlock>
+        <ComboBox x:Name="comboSort" Margin="402,12,421,487"/>
     </Grid>
 </Page>

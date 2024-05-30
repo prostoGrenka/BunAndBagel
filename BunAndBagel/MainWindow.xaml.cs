@@ -25,7 +25,10 @@ namespace BunAndBagel
     {
         public MainWindow()
         {
+            
             InitializeComponent();
+
+
             AppConnect.modelOdb = new BunAndBagelEntities();
             AppFrame.FrmMain = frameMain;
 

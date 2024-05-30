@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BunAndBagel"
         mc:Ignorable="d"
-        Title="Булочка и Бублик" Height="760" Width="957" Background="#FF7F50">
+        Title="Булочка и Бублик" Height="760" Width="957" Background="#FF7F50" MaxWidth="957" MaxHeight="760" MinWidth="957" MinHeight="760" WindowStartupLocation="CenterOwner">
     <Grid Margin="0,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*" />

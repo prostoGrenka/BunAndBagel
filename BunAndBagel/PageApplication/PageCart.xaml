@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BunAndBagel.PageApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="PageCart">
 
     <Grid>
@@ -13,7 +13,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="718" Height="163">
-                        <Image Source="{Binding beautyGoods.CurrentPhoto}" Grid.Column="0" Margin="-27,13,535,14"/>
+                        <Image Source="{Binding CurrentPhoto}" Grid.Column="0" Margin="-27,13,535,14"/>
                         <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,42,419,81"><Run Text="Название: "/><Run Text=" "/><Run Text="{Binding Name}"/></TextBlock>
                         <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="421,70,183,63"><Run Text="Цена: "/><Run Text=" "/><Run Text="{Binding Price}"/></TextBlock>
                         <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Margin="151,85,419,36"><Run Text="Кол-во: "/><Run Text=" "/><Run Text="{Binding Quantity}"/></TextBlock>
@@ -23,8 +23,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-            <Button x:Name="btnBack" Content="Обратно к покупкам" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" Height="32" Width="213" FontSize="16" FontFamily="Verdana" Background="SandyBrown"/>
-        <Button x:Name="btnCheckout" Content="Оформить заказ" HorizontalAlignment="Left" Margin="596,395,0,0" VerticalAlignment="Top" Height="44" Width="194" FontFamily="Verdana" FontSize="16" Background="SandyBrown"/>
-        <Label x:Name="labelCart" Content="Корзина" HorizontalAlignment="Left" Margin="326,0,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="26"/>
+        <Button x:Name="btnBack" Content="Обратно к покупкам" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Height="32" Width="213" FontSize="16" FontFamily="Verdana" Background="SandyBrown"/>
+        <Button x:Name="btnCheckout" Content="Оформить заказ" HorizontalAlignment="Left" Margin="596,546,0,0" VerticalAlignment="Top" Height="44" Width="194" FontFamily="Verdana" FontSize="16" Background="SandyBrown"/>
+        <Label x:Name="labelCart" Content="Корзина" HorizontalAlignment="Left" Margin="361,-1,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="26"/>
     </Grid>
 </Page>

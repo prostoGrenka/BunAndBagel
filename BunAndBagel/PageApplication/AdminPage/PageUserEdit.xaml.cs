@@ -23,7 +23,7 @@ namespace BunAndBagel.PageApplication.AdminPage
     /// </summary>
     public partial class PageUserEdit : Page
     {
-        private User _editUser = new User();
+        public User _editUser = new User();
         public PageUserEdit(User selectedUser)
         {
             InitializeComponent();
@@ -32,9 +32,10 @@ namespace BunAndBagel.PageApplication.AdminPage
             {
                 _editUser = selectedUser;
             }
-
+            DataContext = _editUser;
             roleCombo.ItemsSource = BunAndBagelEntities.GetContext().Role.Select(x => x.Role1).ToList();
 
+            AppConnect.modelOdb.User.ToArray();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

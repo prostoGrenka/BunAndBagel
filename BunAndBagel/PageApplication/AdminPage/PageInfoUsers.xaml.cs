@@ -97,5 +97,45 @@ namespace BunAndBagel.PageApplication.AdminPage
         {
             AppFrame.FrmMain.Navigate(new PageUserEdit((sender as Button).DataContext as User));
         }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedUSer = ListUsers.SelectedItems.Cast<User>().ToList();
+            List<User> user = AppConnect.modelOdb.User.ToList();
+
+            if (selectedUSer != null)
+            {
+                if (MessageBox.Show("Вы точно хотите удалить выбранный товар?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        BunAndBagelEntities.GetContext().User.RemoveRange(selectedUSer);
+                        BunAndBagelEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные удалены");
+                        ListUsers.ItemsSource = BunAndBagelEntities.GetContext().User.ToList();
+                        user = AppConnect.modelOdb.User.ToList();
+
+                        if (user.Count > 0)
+                        {
+                            tbCounter.Text = "Найдено " + user.Count + " товаров";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Вы ничего не выбрали", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            comboSort.SelectedIndex = -1;
+            tbSearh.Clear();
+        }
     }
 }

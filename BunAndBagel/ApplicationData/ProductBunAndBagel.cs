@@ -11,7 +11,8 @@ namespace BunAndBagel.ApplicationData
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Diagnostics.Eventing.Reader;
+
     public partial class ProductBunAndBagel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,6 +32,23 @@ namespace BunAndBagel.ApplicationData
         public int Weight { get; set; }
         public int Quantity { get; set; }
         public string Photo { get; set; }
+        public string Desciption { get; set; }
+
+        public string CurrentPhoto
+        {
+
+            get
+            {
+                if(string.IsNullOrEmpty(Photo) || String.IsNullOrWhiteSpace(Photo))
+                        {
+                    return "/Picture/Logotip.png";
+                }
+                else
+                {
+                    return "/Picture/" + Photo;
+                }
+            }
+        }
     
         public virtual Category Category { get; set; }
         public virtual Cook Cook { get; set; }

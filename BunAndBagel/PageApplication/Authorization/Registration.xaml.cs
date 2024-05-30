@@ -27,6 +27,7 @@ namespace BunAndBagel.PageApplication
         public Registration()
         {
             InitializeComponent();
+
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -36,39 +37,57 @@ namespace BunAndBagel.PageApplication
 
         private void RegBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (AppConnect.modelOdb.User.Count(x => x.Login == txbLogin.Text) > 0)
+            if(txbLogin.Text != "")
             {
-                MessageBox.Show("Пользователь с таким логином уже есть!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            try
-            {
-                User userObj = new User()
+                if(txbPass.Text != "")
                 {
-                    Login = txbLogin.Text,
-                    Name = txbName.Text,
-                    Lastname = txbLastName.Text,
-                    Password = txbLogin.Text,
-                    Email = txbEmail.Text,
-                    Phone = txbNumberPhone.Text,
-                    Adrees = txbAdress.Text,
-                    Id_Role = 2,
-                };
+                    if (AppConnect.modelOdb.User.Count(x => x.Login == txbLogin.Text) > 0)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже есть!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                    try
+                    {
+                        User userObj = new User()
+                        {
+                            Login = txbLogin.Text,
+                            Name = txbName.Text,
+                            Lastname = txbLastName.Text,
+                            Password = txbLogin.Text,
+                            Email = txbEmail.Text,
+                            Phone = txbNumberPhone.Text,
+                            Adrees = txbAdress.Text,
+                            Id_Role = 2,
+                        };
 
-                AppConnect.modelOdb.User.Add(userObj);
-                AppConnect.modelOdb.SaveChanges();
-                MessageBox.Show("Данные успешно добавлены!",
-                    "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        AppConnect.modelOdb.User.Add(userObj);
+                        AppConnect.modelOdb.SaveChanges();
+                        MessageBox.Show("Данные успешно добавлены!",
+                            "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка добавления данных!",
+                            "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Поле с паролем не должно быть пусто!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Ошибка добавления данных!",
-                    "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Поле с логином не должно быть пусто!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
+            
         }
 
-        private void PasswordBox_PasswordChange(object sender, RoutedEventArgs e)
+        private void psbPass_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (psbPass.Password != txbPass.Text)
             {

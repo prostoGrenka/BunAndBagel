@@ -10,22 +10,20 @@
 
 
     <Grid>
-        <Image Margin="42,72,392,320"></Image>
-        <Button x:Name ="btnAddImage" Content="Добавить" Margin="156,285,506,285" Background="SandyBrown" Click="btnAddImage_Click"></Button>
-        
+
         <Label Content="Редактирование пользователя" Margin="225,10,178,542" FontSize="26"/>
 
-        <StackPanel Margin="400,74,19,137" Orientation="Horizontal">
+        <StackPanel Margin="254,83,165,128" Orientation="Horizontal">
 
             <StackPanel Width="190" Height="354">
                 <Label Content="Логин" HorizontalAlignment="Center" Margin="5" Height="24" Width="134" />
-                <TextBox x:Name="txbLogin" Text ="{Binding User.Login}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox x:Name="txbLogin" Text ="{Binding Login}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Пароль" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
-                <TextBox x:Name="txbPass" Text="{Binding User.Password}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox x:Name="txbPass" Text="{Binding Password}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Повтор пароля" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
-                <TextBox x:Name="psbPass" Text="{Binding User.Password}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox x:Name="psbPass" Text="{Binding Password}" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Почта" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
                 <TextBox Text="{Binding Email}" FontSize="12" x:Name="txbEmail" HorizontalAlignment="Center" Margin="5" Width="137" Height="35"  Background="RosyBrown"/>
@@ -34,23 +32,23 @@
             </StackPanel>
             <StackPanel Width="188" Height="354">
                 <Label Content="Имя" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
-                <TextBox Text="{Binding User.Name}" FontSize="12" x:Name="txbName" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox Text="{Binding Name}" FontSize="12" x:Name="txbName" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Фамилия" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
-                <TextBox Text="{Binding User.LastName}" FontSize="12" x:Name="txbLastName" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox Text="{Binding Lastname}" FontSize="12" x:Name="txbLastName" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Номер телефона" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
-                <TextBox Text="{Binding User.Phone}" FontSize="12" x:Name="txbNumberPhone" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox Text="{Binding Phone}" FontSize="12" x:Name="txbNumberPhone" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Адресс" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
-                <TextBox Text="{Binding User.Adrees}" FontSize="12" x:Name="txbAdress" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <TextBox Text="{Binding Adrees}" FontSize="12" x:Name="txbAdress" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Button x:Name="Back" HorizontalAlignment="Center" Height="25" Width="140" Margin="10" Content="Назад" Click="btnBack_Click" Background="SandyBrown"/>
 
             </StackPanel>
         </StackPanel>
-        <Label Content="Роль пользователя" Margin="252,340,405,226"/>
-        <ComboBox x:Name="roleCombo" Margin="252,379,405,195" Background="RosyBrown"/>
-        <Button x:Name="btnClear" Content="Очистить всё" Margin="252,410,405,157" Background="SandyBrown" Click="btnClear_Click"></Button>
+        <Label Content="Роль пользователя" Margin="106,349,551,217"/>
+        <ComboBox x:Name="roleCombo" Margin="106,388,551,186" Background="RosyBrown"/>
+        <Button x:Name="btnClear" Content="Очистить всё" Margin="106,419,551,148" Background="SandyBrown" Click="btnClear_Click"></Button>
     </Grid>
 </Page>

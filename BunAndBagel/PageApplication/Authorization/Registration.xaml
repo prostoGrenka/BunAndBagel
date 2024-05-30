@@ -9,9 +9,9 @@
       Title="Registration" FontFamily="Bahnschrift">
 
     <Grid>
-        <Label Content="Регистрация" Margin="252,-6,337,417" FontSize="26"/>
+        <Label Content="Регистрация" Margin="300,0,289,411" FontSize="26"/>
 
-        <StackPanel Margin="334,33,85,63" Orientation="Horizontal">
+        <StackPanel Margin="215,45,204,51" Orientation="Horizontal">
 
             <StackPanel Width="190" Height="354">
                 <Label Content="Логин" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
@@ -21,12 +21,12 @@
                 <TextBox x:Name="txbPass" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
                 <Label Content="Повтор пароля" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
-                <PasswordBox x:Name="psbPass" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
+                <PasswordBox x:Name="psbPass" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown" PasswordChanged="psbPass_PasswordChanged"/>
 
                 <Label Content="Почта" HorizontalAlignment="Center" Margin="5" Height="24" Width="134"/>
                 <TextBox Text="Не обязательно" x:Name="txbEmail" HorizontalAlignment="Center" Margin="5" Width="137" Height="35" Background="RosyBrown"/>
 
-                <Button x:Name="RegBtn" Height="25" Width="140" Margin="10" Content="Зарегистрироваться" Click="RegBtn_Click" Background="SandyBrown"/>
+                <Button x:Name="RegBtn" Height="25" Width="140" Margin="10" Content="Зарегистрироваться" Click="RegBtn_Click" Background="SandyBrown" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Width="188" Height="354">
                 <Label Content="Имя" HorizontalAlignment="Center" Margin="5" Height="24" Width="135"/>
