@@ -249,6 +249,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageApplication\PageQR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageApplication\AdminPage\Main.xaml.cs">
@@ -277,6 +281,9 @@
     </Compile>
     <Compile Include="PageApplication\PageCart.xaml.cs">
       <DependentUpon>PageCart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\PageQR.xaml.cs">
+      <DependentUpon>PageQR.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19efc0681c5d40e7976720a48153714d" Name="Diagram1">
+      <Diagram DiagramId="7528772781df4172b293db9ee31910ed" Name="Diagram1">
         <EntityTypeShape EntityType="BunAndBagelModel.Balance" Width="1.5" PointX="0.75" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BunAndBagelModel.Cart" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.Cart" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.Category" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.Cook" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.Filling" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.KindBunAndBagel" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.KindDough" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.Order" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BunAndBagelModel.OrderingProducts" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BunAndBagelModel.OrderingProducts" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.ProductBunAndBagel" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.Role" Width="1.5" PointX="0.75" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BunAndBagelModel.StatusOrder" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />

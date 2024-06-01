@@ -23,7 +23,6 @@ namespace BunAndBagel.ApplicationData
         public int Id { get; set; }
         public int Id_StatusOrder { get; set; }
         public Nullable<int> Id_Cart { get; set; }
-        public string NumberOrder { get; set; }
     
         public virtual Cart Cart { get; set; }
         public virtual StatusOrder StatusOrder { get; set; }

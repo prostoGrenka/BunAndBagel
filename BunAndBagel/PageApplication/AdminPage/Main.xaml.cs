@@ -1,4 +1,5 @@
-﻿using BunAndBagel.ApplicationData;
+﻿using Aspose.Pdf.Annotations;
+using BunAndBagel.ApplicationData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,7 +155,46 @@ namespace BunAndBagel.PageApplication
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                listProducts.ItemsSource = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
+                Button b = sender as Button;
 
+                int selectedGoodsId = int.Parse(((b.Parent as StackPanel).Children[0] as TextBlock).Text);
+
+                int idUsers = Convert.ToInt32(App.Current.Properties["IdUser"].ToString()); 
+
+                var order = BunAndBagelEntities.GetContext().OrderingProducts.FirstOrDefault(o => o.IdUser == idUsers);
+
+                if (order == null)
+                {
+                    order = new OrderingProducts()
+                    {
+                        IdUser = idUsers,
+                        IdOrder = 1,
+                        IdProduct = selectedGoodsId
+                    };
+                    BunAndBagelEntities.GetContext().OrderingProducts.Add(order);
+                    BunAndBagelEntities.GetContext().SaveChanges();
+                }
+
+                var cartnew = new Cart()
+                {
+                    Id_Order = order.IdOrder,
+                    Id_Product = selectedGoodsId
+                };
+
+                BunAndBagelEntities.GetContext().Cart.Add(cartnew);
+                BunAndBagelEntities.GetContext().SaveChanges();
+
+
+                MessageBox.Show("Товар успешно добавлен в корзину!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                AppFrame.FrmMain.Navigate(new PageCart());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка при добавлении товара в корзину: " + ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)

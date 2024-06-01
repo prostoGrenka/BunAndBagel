@@ -22,6 +22,7 @@ namespace BunAndBagel.ApplicationData
     
         public int Id { get; set; }
         public Nullable<int> Id_Order { get; set; }
+        public Nullable<int> Id_Product { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
