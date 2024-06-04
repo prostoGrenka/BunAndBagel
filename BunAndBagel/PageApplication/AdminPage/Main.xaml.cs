@@ -45,7 +45,7 @@ namespace BunAndBagel.PageApplication
             {
                 tbCounter.Text = "Ничего не найдено";
             }
-            listProducts.ItemsSource = productBunAndBagel; 
+            listProducts.ItemsSource = productBunAndBagel;
             comboSort.Items.Add("По вохврастанию товаров на складе");
             comboSort.Items.Add("По уменьшению товаров на складе");
         }
@@ -66,7 +66,7 @@ namespace BunAndBagel.PageApplication
                         listProducts.ItemsSource = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
                         productBunAndBagel = AppConnect.modelOdb.ProductBunAndBagel.ToList();
 
-                        if(productBunAndBagel.Count > 0)
+                        if (productBunAndBagel.Count > 0)
                         {
                             tbCounter.Text = "Найдено " + productBunAndBagel.Count + " товаров";
                         }
@@ -155,47 +155,55 @@ namespace BunAndBagel.PageApplication
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                listProducts.ItemsSource = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
-                Button b = sender as Button;
-
-                int selectedGoodsId = int.Parse(((b.Parent as StackPanel).Children[0] as TextBlock).Text);
-
-                int idUsers = Convert.ToInt32(App.Current.Properties["IdUser"].ToString()); 
-
-                var order = BunAndBagelEntities.GetContext().OrderingProducts.FirstOrDefault(o => o.IdUser == idUsers);
-
-                if (order == null)
+                var goodsforcart = listProducts.SelectedItems.Cast<ProductBunAndBagel>().ToList();
+                if (goodsforcart.Count > 0)
                 {
-                    order = new OrderingProducts()
+
+                    try
                     {
-                        IdUser = idUsers,
-                        IdOrder = 1,
-                        IdProduct = selectedGoodsId
-                    };
-                    BunAndBagelEntities.GetContext().OrderingProducts.Add(order);
-                    BunAndBagelEntities.GetContext().SaveChanges();
+
+                        var button = sender as Button;
+                        int selectg = Convert.ToInt32(button.Tag);
+                        int idUsers = Convert.ToInt32(App.Current.Properties["Id"].ToString());
+                        int selectedGoodsId = ((ProductBunAndBagel)listProducts.SelectedItem).Id;
+
+
+                        var order = BunAndBagelEntities.GetContext().OrderingProducts.FirstOrDefault(o => o.IdUser == idUsers);
+                        if (order == null)
+                        {
+                            order = new OrderingProducts()
+                            {
+                                IdUser = idUsers,
+                                IdStatusOrder = Convert.ToString(2)
+                            };
+                            BunAndBagelEntities.GetContext().OrderingProducts.Add(order);
+                            BunAndBagelEntities.GetContext().SaveChanges();
+                        }
+
+                        var cartnew = new Cart()
+                        {
+                            Id_Order = order.Id,
+                            Id_Product = selectedGoodsId,
+                        };
+
+                        BunAndBagelEntities.GetContext().Cart.Add(cartnew);
+                        BunAndBagelEntities.GetContext().SaveChanges();
+
+                        MessageBox.Show("Товар успешно добавлен в корзину!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        AppFrame.FrmMain.Navigate(new PageCart());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Произошла ошибка при добавлении товара в корзину: " + ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-
-                var cartnew = new Cart()
+                else
                 {
-                    Id_Order = order.IdOrder,
-                    Id_Product = selectedGoodsId
-                };
-
-                BunAndBagelEntities.GetContext().Cart.Add(cartnew);
-                BunAndBagelEntities.GetContext().SaveChanges();
-
-
-                MessageBox.Show("Товар успешно добавлен в корзину!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                AppFrame.FrmMain.Navigate(new PageCart());
+                    MessageBox.Show("Выберите товар из списка!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Произошла ошибка при добавлении товара в корзину: " + ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+             
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
