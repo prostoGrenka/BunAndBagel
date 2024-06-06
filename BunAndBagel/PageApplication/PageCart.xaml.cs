@@ -42,11 +42,12 @@ namespace BunAndBagel.PageApplication
                               .ToList();
 
             var cartobj = BunAndBagelEntities.GetContext().Cart
-                               .Where(c => orderobj.Contains(c.IdOrder))
+                               .Where(c => orderobj.Contains(c.Id_Order))
                                .Select(x => x.idGoods)
                                .ToList();
+
             var goodsInCart = BunAndBagelEntities.GetContext().ProductBunAndBagel
-                                         .Where(x => cartobj.Contains(x.idGoods))
+                                         .Where(x => cartobj.Contains(x.Id))
                                          .ToList();
             ListOrders.ItemsSource = goodsInCart;
 
@@ -59,7 +60,6 @@ namespace BunAndBagel.PageApplication
             else
             {
                 btnCheckout.IsEnabled = false;
-                btnCheckout.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F6C5DC"));
                 tbCounter.Text = "Ваша корзина пустая!";
             }
         }
@@ -148,14 +148,15 @@ namespace BunAndBagel.PageApplication
                 decimal sum = 0;
 
                 var goodsobj = BunAndBagelEntities.GetContext().Cart
-                                     .Where(x => x.orders.idUsers == idusercart)
+                                     .Where(x => x.Order.idUsers == idUserCart)
                                      .ToList();
+
                 foreach (var item in goodsobj)
                 {
                     if (item is Cart data)
                     {
-
-                        Image img = Image.GetInstance("\"C:\\Users\\Evgen\\Downloads\"" + data.ProductBunAndBagel.CurrentPhoto);
+						Cart data = (Cart)item;
+						Image img = Image.GetInstance("\"C:\\Users\\Evgen\\Downloads\"" + data.ProductBunAndBagel.CurrentPhoto);
                         img.ScaleAbsolute(100f, 100f);
                         document.Add(img);
                         document.Add(new Paragraph("Название: " + data.ProductBunAndBagel.nameGoods, font));
@@ -199,7 +200,7 @@ namespace BunAndBagel.PageApplication
 
             var context = BunAndBagelEntities.GetContext();
             var itemsToDelete = context.Cart
-			.Where(x => x.orders.idUsers == idusercart)
+			.Where(x => x.Id_Order.idUsers == idusercart)
             .ToList();
 
             if (itemsToDelete.Any())
@@ -215,10 +216,10 @@ namespace BunAndBagel.PageApplication
             var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(o => o.Id_User == idUsers);
             var cartItems = BunAndBagelEntities.GetContext().Cart.Where(c => c.Order.idUsers == idUsers);
 
-            order = new Order()
+            order = new OrderingProducts()
             {
-                idUsers = idUsers,
-                idStatus = 1
+				IdUser = idUsers,
+				IdStatusOrder = "1"
             };
 
             BunAndBagelEntities.GetContext().Order.Add(order);
@@ -228,8 +229,8 @@ namespace BunAndBagel.PageApplication
             {
                 var cartNew = new OrderingProducts()
                 {
-					Id_Order = order.idOrder,
-					Id_Product = cartItem.idGoods
+					IdOrder = order.idOrder,
+					IdProduct = cartItem.idGoods
                 };
 
                 BunAndBagelEntities.GetContext().OrderingProducts.Add(cartNew);
@@ -239,4 +240,4 @@ namespace BunAndBagel.PageApplication
         }
     }
 }
-}
+

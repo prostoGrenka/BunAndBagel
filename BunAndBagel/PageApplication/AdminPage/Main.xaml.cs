@@ -23,7 +23,7 @@ namespace BunAndBagel.PageApplication
     /// </summary>
     public partial class Main : Page
     {
-        public Main()
+        public Main(User user)
         {
             InitializeComponent();
             List<ProductBunAndBagel> products = AppConnect.modelOdb.ProductBunAndBagel.ToList();
