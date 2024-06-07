@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Order" Type="int" />
           <Property Name="Id_Product" Type="int" />
         </EntityType>
@@ -66,18 +66,17 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_StatusOrder" Type="int" Nullable="false" />
-          <Property Name="Id_Cart" Type="int" />
+          <Property Name="Id_User" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderingProducts">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdOrder" Type="int" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="IdProduct" Type="int" Nullable="false" />
-          <Property Name="IdStatusOrder" Type="nchar" MaxLength="10" />
-          <Property Name="IdCart" Type="nchar" MaxLength="10" />
+          <Property Name="IdStatusOrder" Type="int" />
         </EntityType>
         <EntityType Name="ProductBunAndBagel">
           <Key>
@@ -135,15 +134,27 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Lastname" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK_Order_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="FK_Cart_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cart">
+            <Principal Role="Order">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="Id_Cart" />
+            <Dependent Role="Cart">
+              <PropertyRef Name="Id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_ProductBunAndBagel">
+          <End Role="ProductBunAndBagel" Type="Self.ProductBunAndBagel" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBunAndBagel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="Id_Product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -156,6 +167,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="Id_StatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Id_User" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,12 +317,20 @@
           <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Order_Cart" Association="Self.FK_Order_Cart">
-            <End Role="Cart" EntitySet="Cart" />
+          <AssociationSet Name="FK_Cart_Order" Association="Self.FK_Cart_Order">
             <End Role="Order" EntitySet="Order" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_ProductBunAndBagel" Association="Self.FK_Cart_ProductBunAndBagel">
+            <End Role="ProductBunAndBagel" EntitySet="ProductBunAndBagel" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_StatusOrder" Association="Self.FK_Order_StatusOrder">
             <End Role="StatusOrder" EntitySet="StatusOrder" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderingProducts_Order" Association="Self.FK_OrderingProducts_Order">
@@ -361,10 +392,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Order" Type="Int32" />
           <Property Name="Id_Product" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Cart" FromRole="Cart" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Cart_Order" FromRole="Cart" ToRole="Order" />
+          <NavigationProperty Name="ProductBunAndBagel" Relationship="Self.FK_Cart_ProductBunAndBagel" FromRole="Cart" ToRole="ProductBunAndBagel" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -416,21 +448,21 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_StatusOrder" Type="Int32" Nullable="false" />
-          <Property Name="Id_Cart" Type="Int32" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_Order_Cart" FromRole="Order" ToRole="Cart" />
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Order" FromRole="Order" ToRole="Cart" />
           <NavigationProperty Name="StatusOrder" Relationship="Self.FK_Order_StatusOrder" FromRole="Order" ToRole="StatusOrder" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderingProducts" Relationship="Self.FK_OrderingProducts_Order" FromRole="Order" ToRole="OrderingProducts" />
         </EntityType>
         <EntityType Name="OrderingProducts">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdOrder" Type="Int32" Nullable="false" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" Nullable="false" />
-          <Property Name="IdStatusOrder" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IdCart" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdStatusOrder" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderingProducts_Order" FromRole="OrderingProducts" ToRole="Order" />
           <NavigationProperty Name="ProductBunAndBagel" Relationship="Self.FK_OrderingProducts_ProductBunAndBagel" FromRole="OrderingProducts" ToRole="ProductBunAndBagel" />
           <NavigationProperty Name="User" Relationship="Self.FK_OrderingProducts_User" FromRole="OrderingProducts" ToRole="User" />
@@ -451,6 +483,7 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Desciption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductBunAndBagel" FromRole="ProductBunAndBagel" ToRole="Cart" />
           <NavigationProperty Name="Category" Relationship="Self.FK_ProductBunAndBagel_Category" FromRole="ProductBunAndBagel" ToRole="Category" />
           <NavigationProperty Name="Cook" Relationship="Self.FK_ProductBunAndBagel_Cook" FromRole="ProductBunAndBagel" ToRole="Cook" />
           <NavigationProperty Name="Filling" Relationship="Self.FK_ProductBunAndBagel_Filling" FromRole="ProductBunAndBagel" ToRole="Filling" />
@@ -499,6 +532,7 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Balance" Relationship="Self.FK_User_Balance" FromRole="User" ToRole="Balance" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="OrderingProducts" Relationship="Self.FK_OrderingProducts_User" FromRole="User" ToRole="OrderingProducts" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
@@ -514,15 +548,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="FK_Cart_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cart">
+            <Principal Role="Order">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="Id_Cart" />
+            <Dependent Role="Cart">
+              <PropertyRef Name="Id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_ProductBunAndBagel">
+          <End Role="ProductBunAndBagel" Type="Self.ProductBunAndBagel" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBunAndBagel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="Id_Product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -598,6 +644,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderingProducts_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderingProducts" Type="Self.OrderingProducts" Multiplicity="*" />
@@ -665,9 +723,13 @@
             <End Role="Balance" EntitySet="Balance" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Cart" Association="Self.FK_Order_Cart">
-            <End Role="Cart" EntitySet="Cart" />
+          <AssociationSet Name="FK_Cart_Order" Association="Self.FK_Cart_Order">
             <End Role="Order" EntitySet="Order" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_ProductBunAndBagel" Association="Self.FK_Cart_ProductBunAndBagel">
+            <End Role="ProductBunAndBagel" EntitySet="ProductBunAndBagel" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductBunAndBagel_Category" Association="Self.FK_ProductBunAndBagel_Category">
             <End Role="Category" EntitySet="Category" />
@@ -691,6 +753,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Order_StatusOrder" Association="Self.FK_Order_StatusOrder">
             <End Role="StatusOrder" EntitySet="StatusOrder" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderingProducts_Order" Association="Self.FK_OrderingProducts_Order">
@@ -783,7 +849,7 @@
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_StatusOrder" ColumnName="Id_StatusOrder" />
-                <ScalarProperty Name="Id_Cart" ColumnName="Id_Cart" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -795,7 +861,6 @@
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
                 <ScalarProperty Name="IdStatusOrder" ColumnName="IdStatusOrder" />
-                <ScalarProperty Name="IdCart" ColumnName="IdCart" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

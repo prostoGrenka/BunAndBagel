@@ -14,17 +14,11 @@ namespace BunAndBagel.ApplicationData
     
     public partial class Cart
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cart()
-        {
-            this.Order = new HashSet<Order>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> Id_Order { get; set; }
         public Nullable<int> Id_Product { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual ProductBunAndBagel ProductBunAndBagel { get; set; }
     }
 }

@@ -31,213 +31,174 @@ namespace BunAndBagel.PageApplication
     /// </summary>
     public partial class PageCart
     {
-        int idUserCart = Convert.ToInt32(App.Current.Properties["Id"].ToString());
-        public PageCart()
+		int idUserCart = Convert.ToInt32(App.Current.Properties["Id"].ToString());  // Берём ID юзера со страницы авторизации
+		public PageCart()
         {
             InitializeComponent();
 
-            var orderobj = BunAndBagelEntities.GetContext().OrderingProducts
-                              .Where(x => x.IdUser == idUserCart)
-                              .Select(x => x.Id)
-                              .ToList();
+			//List<ProductBunAndBagel> productInCart = AppConnect.modelOdb.ProductBunAndBagel.ToList();
+			//var currentProduct = BunAndBagelEntities.GetContext().ProductBunAndBagel.ToList();
+			//ListOrders.ItemsSource = currentProduct;
 
-            var cartobj = BunAndBagelEntities.GetContext().Cart
-                               .Where(c => orderobj.Contains(c.Id_Order))
-                               .Select(x => x.idGoods)
-                               .ToList();
+			var orderoObj = BunAndBagelEntities.GetContext().Order  
+				   .Where(x => x.Id_User == idUserCart)
+				   .Select(x => x.Id)
+				   .ToList();
 
-            var goodsInCart = BunAndBagelEntities.GetContext().ProductBunAndBagel
-                                         .Where(x => cartobj.Contains(x.Id))
-                                         .ToList();
-            ListOrders.ItemsSource = goodsInCart;
+			var cartobj = BunAndBagelEntities.GetContext().Cart
+				   .Where(c => orderoObj.Contains((int)c.Id_Order))
+				   .Select(x => x.Id_Product)
+				   .ToList();
 
+			var goodsInCart = BunAndBagelEntities.GetContext().ProductBunAndBagel
+							 .Where(x => cartobj.Contains(x.Id))
+							 .ToList();
 
-            if (ListOrders.Items.Count > 0)
-            {
-                btnCheckout.IsEnabled = true;
-                tbCounter.Text = "Всего в корзине " + ListOrders.Items.Count + " товаров";
-            }
-            else
-            {
-                btnCheckout.IsEnabled = false;
-                tbCounter.Text = "Ваша корзина пустая!";
-            }
-        }
+			ListOrders.ItemsSource = goodsInCart;
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var userObj = AppConnect.modelOdb.User;
+			ListOrders.ItemsSource = goodsInCart;
 
-            int us = Convert.ToInt32(App.Current.Properties["roleUser"].ToString());
-            if (us == 1)
-            {
-                AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
-            }
-            else if (us == 2)
-            {
-                AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
-            }
-        }
+			if (ListOrders.Items.Count <= 0)
+			{
+				ListOrders.IsEnabled = false;
+			}
+			else { ListOrders.IsEnabled = true; }
+		}
 
-        private void btnDel_Click(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Show("Вы точно хотите удалить выбранный товар из заказа?", "Подтверждение удаления",
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
+		private void btnBack_Click(object sender, RoutedEventArgs e)
+		{
+			AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
+		}
 
-                ListOrders.ItemsSource = BunAndBagelEntities.GetContext().Cart.ToList();
-                Button b = sender as Button;
-                int ID = int.Parse(((b.Parent as StackPanel).Children[0] as TextBlock).Text);
-                Console.WriteLine(ID);
-                AppConnect.modelOdb.Cart.Remove(
-                AppConnect.modelOdb.Cart.Where(x => x.Id == ID).First());
-                AppConnect.modelOdb.SaveChanges();
-                AppFrame.FrmMain.GoBack();
-                AppFrame.FrmMain.Navigate(new PageCart());
-            }
-        }
+		private void btnCheckout_Click(object sender, RoutedEventArgs e)
+		{
 
-        private void btnCheckout_Click(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Show("Вы точно хотите оформить заказ? Все товары из вашей корзины будут удалены!", "Внимание!",
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    addManager();
-                    CreatePDF();
-                    MessageBox.Show("PDF документ был успешно загружен!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                    RemoveItemsFromCart();
-                    AppFrame.FrmMain.Navigate(new PageQR());
+			if (MessageBox.Show($"Вы точно хотите сформировать заказ?", "Внимание",
+			   MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				try
+				{
+					CreatePDF();
+					AddManagerOrder();
+					removecart();
+					MessageBox.Show("PDF документ заказа успешно сформирован!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+					AppFrame.FrmMain.Navigate(new PageQR());
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message.ToString());
+				}
+			}
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+		}
 
-            }
-        }
+		private void CreatePDF()
+		{
+			Document doc = new Document();
 
-        private void CreatePDF()
-        {
-            iTextSharp.text.Document document = new Document();
+			try
+			{
+				string fileName = System.IO.Path.Combine("C:\\Users\\Evgen\\Downloads",  $"order_{ DateTime.Now:yyyyMMddHH}.pdf");
+				PdfWriter.GetInstance(doc, new FileStream(fileName, FileMode.Create));
 
-            try
-            {
-                string downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
-                int fileIndex = 1;
+				doc.Open();
+				BaseFont basefont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
-                string fileName = "";
-                do
-                {
-                    fileName = System.IO.Path.Combine(downloadFolder, $"order_{fileIndex}.pdf");
-                    fileIndex++;
-                } while (File.Exists(fileName));
+				Font font = new Font(basefont, 12);
+				Font font1 = new Font(basefont, 25, 3, BaseColor.BLUE);
+				Paragraph paragraph1 = new Paragraph("список товаров", font1);
+				doc.Add(paragraph1);
+				int sum = 0;
 
-                PdfWriter.GetInstance(document, new FileStream(fileName, FileMode.Create));
+				var orderObj = BunAndBagelEntities.GetContext().Order
+							   .Where(x => x.Id_User == idUserCart)
+							   .Select(x => x.Id)
+							   .ToList();
 
-                document.Open();
-                BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+				var cartObj = BunAndBagelEntities.GetContext().Cart
+								   .Where(c => orderObj.Contains((int)c.Id_Order))
+								   .ToList();
 
-                Font font = new Font(baseFont, 12);
-                Font font1 = new Font(baseFont, 24, 2, BaseColor.GRAY);
-                Paragraph paragraph1 = new Paragraph("Список товаров", font1);
-                paragraph1.Alignment = Element.ALIGN_CENTER;
-                document.Add(paragraph1);
-                decimal sum = 0;
-
-                var goodsobj = BunAndBagelEntities.GetContext().Cart
-                                     .Where(x => x.Order.idUsers == idUserCart)
-                                     .ToList();
-
-                foreach (var item in goodsobj)
-                {
-                    if (item is Cart data)
-                    {
+				foreach (var item in cartObj)
+				{
+					if (item is Cart)
+					{
 						Cart data = (Cart)item;
-						Image img = Image.GetInstance("\"C:\\Users\\Evgen\\Downloads\"" + data.ProductBunAndBagel.CurrentPhoto);
-                        img.ScaleAbsolute(100f, 100f);
-                        document.Add(img);
-                        document.Add(new Paragraph("Название: " + data.ProductBunAndBagel.nameGoods, font));
-                        document.Add(new Paragraph("Категория: " + data.ProductBunAndBagel.category1.nameCategory, font));
-                        document.Add(new Paragraph("Тип товара: " + data.ProductBunAndBagel.typeGoods1.nameType, font));
-                        document.Add(new Paragraph("Описание: " + data.ProductBunAndBagel.description, font));
-                        document.Add(new Paragraph("Цена: " + data.Pro.price.ToString() + " руб.", font));
-                        document.Add(new Paragraph(" "));
-                        sum += data.ProductBunAndBagel.price;
+						Image img = Image.GetInstance("C:\\Users\\Evgen\\Desktop\\BunAndBagel-master\\BunAndBagel\\Picture\\" + data.ProductBunAndBagel.CurrentPhoto);
+						img.ScaleAbsolute(100f, 100f);
+						doc.Add(img);
+						doc.Add(new Paragraph("Haзвaние: " + data.ProductBunAndBagel.Name, font));
+						doc.Add(new Paragraph("Oпиcaние: " + data.ProductBunAndBagel.Desciption, font));
+						doc.Add(new Paragraph("Категория: " + data.ProductBunAndBagel.Category, font));
+						doc.Add(new Paragraph("Cтоимость: " + data.ProductBunAndBagel.Price.ToString() + "py6.", font));
+						sum += (int)data.ProductBunAndBagel.Price;
+					}
+				}
+				Paragraph paragraph = new Paragraph("Cyммa = " + sum.ToString() + "руб.", font);
+				paragraph.Alignment = Element.ALIGN_RIGHT;
+				doc.Add(paragraph);
+			}
+			catch (DocumentException de)
+			{
+				Console.WriteLine(de.Message);
+			}
+			catch (IOException ioe)
+			{
+				Console.Error.WriteLine(ioe.Message);
+			}
+			finally
+			{
+				doc.Close();
+			}
+		}
 
-                    }
-                }
-                Paragraph paragraph = new Paragraph("Сумма = " + sum.ToString(), font);
-                paragraph.Alignment = Element.ALIGN_RIGHT;
-                document.Add(paragraph);
-            }
-            catch (DocumentException de)
-            {
-                MessageBox.Show(de.Message);
-            }
-            catch (IOException ioe)
-            {
-                MessageBox.Show(ioe.Message);
-            }
-            finally
-            {
-                document.Close();
-            }
-        }
-        private void pageVisible(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Visibility == Visibility.Visible)
-            {
-                BunAndBagelEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-                ListOrders.ItemsSource = BunAndBagelEntities.GetContext().Cart.ToList();
-            }
-        }
+		private void AddManagerOrder()
+		{
+			try
+			{
+				var orderObj = BunAndBagelEntities.GetContext().Order
+				.Where(x => x.Id_User == idUserCart)
+				.Select(x => x.Id)
+				.ToList();
 
-        public void RemoveItemsFromCart()
-        {
+				var cartObj = BunAndBagelEntities.GetContext().Cart
+								   .Where(c => orderObj.Contains((int)c.Id_Order))
+								   .ToList();
 
-            var context = BunAndBagelEntities.GetContext();
-            var itemsToDelete = context.Cart
-			.Where(x => x.Id_Order.idUsers == idusercart)
-            .ToList();
+				foreach (var item in cartObj)
+				{
+					int idUsers = Convert.ToInt32(App.Current.Properties["Id"].ToString());
+					var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(o => o.Id_User == idUsers);
+					var cartnew = new OrderingProducts()
+					{
+						IdUser = idUsers,
+						IdOrder = order.Id,
+						IdProduct = (int)item.Id_Order,
+						IdStatusOrder = 2
+					};
+					BunAndBagelEntities.GetContext().OrderingProducts.Add(cartnew);
+					BunAndBagelEntities.GetContext().SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message.ToString());
+			}
+		}
 
-            if (itemsToDelete.Any())
-            {
-                context.cart.RemoveRange(itemsToDelete);
-                context.SaveChanges();
-            }
-        }
+		private void removecart()
+		{
+			int userId = Convert.ToInt32(App.Current.Properties["Id"]);
+			var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(o => o.Id_User == userId && o.Id_StatusOrder == 2);
 
-        public void addManager()
-        {
-            int idUsers = Convert.ToInt32(App.Current.Properties["idUser"].ToString());
-            var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(o => o.Id_User == idUsers);
-            var cartItems = BunAndBagelEntities.GetContext().Cart.Where(c => c.Order.idUsers == idUsers);
+			var cartItems = BunAndBagelEntities.GetContext().Cart.Where(c => c.Id_Product == order.Id).ToList();
+			BunAndBagelEntities.GetContext().Cart.RemoveRange(cartItems);
+			BunAndBagelEntities.GetContext().SaveChanges();
 
-            order = new OrderingProducts()
-            {
-				IdUser = idUsers,
-				IdStatusOrder = "1"
-            };
 
-            BunAndBagelEntities.GetContext().Order.Add(order);
-            BunAndBagelEntities.GetContext().SaveChanges();
+			ListOrders.ItemsSource = new List<Cart>();
 
-            foreach (var cartItem in cartItems)
-            {
-                var cartNew = new OrderingProducts()
-                {
-					IdOrder = order.idOrder,
-					IdProduct = cartItem.idGoods
-                };
-
-                BunAndBagelEntities.GetContext().OrderingProducts.Add(cartNew);
-            }
-
-            BunAndBagelEntities.GetContext().SaveChanges();
-        }
-    }
+		}
+	}
 }
 

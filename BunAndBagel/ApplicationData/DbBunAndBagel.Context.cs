@@ -15,21 +15,20 @@ namespace BunAndBagel.ApplicationData
     
     public partial class BunAndBagelEntities : DbContext
     {
-        public static BunAndBagelEntities _context;
-
+        private static BunAndBagelEntities _context;
         public BunAndBagelEntities()
-            : base("name=Entities")
+            : base("name=BunAndBagelEntities")
         {
         }
 
-        public static BunAndBagelEntities GetContext()
-        {
-            if (_context == null)
-                _context = new BunAndBagelEntities();
-            return _context;
-        }
+		public static BunAndBagelEntities GetContext()
+		{
+			if (_context == null)
+				_context = new BunAndBagelEntities();
+			return _context;
+		}
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }

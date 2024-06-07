@@ -52,7 +52,7 @@ namespace BunAndBagel.PageApplication.AdminPage
                 AppConnect.modelOdb.User.Add(user);
                 AppConnect.modelOdb.SaveChanges();
                 MessageBox.Show("данные добавлены!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                AppFrame.FrmMain.Navigate(new Main());
+                AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
 
             }
             catch

@@ -90,7 +90,7 @@ namespace BunAndBagel.PageApplication.AdminPage
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.FrmMain.Navigate(new Main());
+            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
         }
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)

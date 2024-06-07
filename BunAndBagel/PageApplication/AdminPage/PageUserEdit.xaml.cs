@@ -96,7 +96,7 @@ namespace BunAndBagel.PageApplication.AdminPage
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-            AppFrame.FrmMain.Navigate(new Main());
+            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
 
         }
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -121,7 +121,7 @@ namespace BunAndBagel.PageApplication.AdminPage
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.FrmMain.Navigate(new Main());
+            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
         }
 
         private void btnAddImage_Click(object sender, RoutedEventArgs e)

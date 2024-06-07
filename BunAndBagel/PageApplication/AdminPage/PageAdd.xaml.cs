@@ -69,7 +69,7 @@ namespace BunAndBagel.PageApplication.AdminPage
                     AppConnect.modelOdb.ProductBunAndBagel.Add(goods);
                     AppConnect.modelOdb.SaveChanges();
                     MessageBox.Show("данные добавлены!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    AppFrame.FrmMain.Navigate(new Main());
+                    AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
                 }
                 catch
                 {
@@ -87,7 +87,7 @@ namespace BunAndBagel.PageApplication.AdminPage
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.FrmMain.Navigate(new Main());
+            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)

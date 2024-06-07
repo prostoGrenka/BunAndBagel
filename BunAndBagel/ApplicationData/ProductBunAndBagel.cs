@@ -17,6 +17,7 @@ namespace BunAndBagel.ApplicationData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductBunAndBagel()
         {
+            this.Cart = new HashSet<Cart>();
             this.OrderingProducts = new HashSet<OrderingProducts>();
         }
     
@@ -32,7 +33,24 @@ namespace BunAndBagel.ApplicationData
         public int Quantity { get; set; }
         public string Photo { get; set; }
         public string Desciption { get; set; }
-    
+
+		public string CurrentPhoto
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(Photo) || String.IsNullOrWhiteSpace(Photo))
+				{
+					return "/Picture/Logotip.png";
+				}
+				else
+				{
+					return "/Picture/" + Photo;
+				}
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
         public virtual Category Category { get; set; }
         public virtual Cook Cook { get; set; }
         public virtual Filling Filling { get; set; }
@@ -40,6 +58,5 @@ namespace BunAndBagel.ApplicationData
         public virtual KindDough KindDough { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderingProducts> OrderingProducts { get; set; }
-
     }
 }

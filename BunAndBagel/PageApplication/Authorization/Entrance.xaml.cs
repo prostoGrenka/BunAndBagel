@@ -42,12 +42,14 @@ namespace BunAndBagel.PageApplication.Authorization
                     switch (userObj.Id_Role)
                     {
                         case 1:
-                            MessageBox.Show("Здравствуйте, Администратор " + userObj.Name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.FrmMain.Navigate(new Main());
+							App.Current.Properties["Id"] = userObj.Id;
+							MessageBox.Show("Здравствуйте, Администратор " + userObj.Name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
                             break;
                         case 2:
-                            MessageBox.Show("Здравствуйте, Пользователь " + userObj.Name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.FrmMain.Navigate(new Main());
+							App.Current.Properties["Id"] = userObj.Id;
+							MessageBox.Show("Здравствуйте, Пользователь " + userObj.Name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.FrmMain.Navigate(new Main((sender as Button).DataContext as User));
                             break;
                         default:
                             MessageBox.Show("Данные не обнаружены!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);

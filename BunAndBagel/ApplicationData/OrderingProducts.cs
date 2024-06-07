@@ -13,14 +13,12 @@ namespace BunAndBagel.ApplicationData
     using System.Collections.Generic;
     
     public partial class OrderingProducts
-
-    {       
+    {
         public int Id { get; set; }
         public int IdOrder { get; set; }
         public int IdUser { get; set; }
         public int IdProduct { get; set; }
-        public string IdStatusOrder { get; set; }
-        public string IdCart { get; set; }
+        public Nullable<int> IdStatusOrder { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual ProductBunAndBagel ProductBunAndBagel { get; set; }
