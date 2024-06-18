@@ -122,37 +122,30 @@ namespace BunAndBagel.PageApplication
             listProducts.ItemsSource = product;
             return product.ToArray();
         }
-
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.FrmMain.Navigate(new AdminPage.PageEdit((sender as Button).DataContext as ProductBunAndBagel));
         }
-
         private void listProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void btnInfoUser_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.FrmMain.Navigate(new AdminPage.PageInfoUsers());
         }
-
         private void comboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             findGoods();
         }
-
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             findGoods();
         }
-
         private void btnCart_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.FrmMain.Navigate(new PageCart());
         }
-
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -164,11 +157,10 @@ namespace BunAndBagel.PageApplication
 
 				int selectedGoodsId = ((ProductBunAndBagel)listProducts.SelectedItem).Id; // Сделать проверку, что товар выбран
 
-				var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(p => p.Id_User == idUsers);
+                var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(p => p.Id_User == idUsers);
 
-
-				if (order == null)
-				{
+                if (order == null)
+                {
 					var orderNew = new Order()
 					{
 						Id_User = idUsers,
@@ -192,6 +184,7 @@ namespace BunAndBagel.PageApplication
 				MessageBox.Show("Товар успешно добавлен в корзину!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
 
 				AppFrame.FrmMain.Navigate(new PageCart());
+
 			}
             catch
             {
@@ -199,12 +192,15 @@ namespace BunAndBagel.PageApplication
 			}
 
 		}
-             
-
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             comboSort.SelectedIndex = -1;
             TBoxSearch.Clear();
         }
-    }
+
+		private void btn_Click(object sender, RoutedEventArgs e)
+		{
+            AppFrame.FrmMain.Navigate(new DescriptionPage());
+		}
+	}
 }

@@ -199,6 +199,25 @@ namespace BunAndBagel.PageApplication
 			ListOrders.ItemsSource = new List<Cart>();
 
 		}
+
+		private void btnDel_Click(object sender, RoutedEventArgs e)
+		{
+			int userId = Convert.ToInt32(App.Current.Properties["Id"]);
+
+			var order = BunAndBagelEntities.GetContext().Order.FirstOrDefault(o => o.Id_User == userId && o.Id_StatusOrder == 2);
+
+			var cartItems = BunAndBagelEntities.GetContext().Cart.Where(c => c.Id_Product == order.Id).ToList();
+			BunAndBagelEntities.GetContext().Cart.RemoveRange(cartItems);
+			BunAndBagelEntities.GetContext().SaveChanges();
+
+
+			ListOrders.ItemsSource = new List<Cart>();
+		}
+
+		private void ListOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
 	}
 }
 

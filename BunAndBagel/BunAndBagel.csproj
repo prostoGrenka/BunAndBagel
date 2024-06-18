@@ -245,6 +245,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageApplication\DescriptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageApplication\PageCart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -278,6 +282,9 @@
     </Compile>
     <Compile Include="PageApplication\Authorization\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApplication\DescriptionPage.xaml.cs">
+      <DependentUpon>DescriptionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageApplication\PageCart.xaml.cs">
       <DependentUpon>PageCart.xaml</DependentUpon>

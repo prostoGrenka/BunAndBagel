@@ -39,7 +39,7 @@
 
 
                         </StackPanel>
-                        <Button x:Name="btn" Content="Подробнее" Margin="417,69,146,43" Grid.Column="1" Background="SandyBrown"/>
+                        <Button x:Name="btn" Content="Подробнее" Margin="417,69,146,43" Grid.Column="1" Background="SandyBrown" Click="btn_Click"/>
                         <Button Content ="Измененить" x:Name="btnEdit" Width="137" Margin="417,33,146,74" Height="31" Grid.Column="1" Click="btnEdit_Click" Background="SandyBrown"/>
                         <StackPanel Grid.Column="1" Margin="677,44,143,62" Grid.ColumnSpan="2">
                             <Button x:Name="btnBuy" Content="Купить" Background="SandyBrown" FontSize="18" Click="btnBuy_Click" Height="25" Width="64"/>
